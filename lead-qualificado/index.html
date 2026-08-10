@@ -104,6 +104,7 @@ section+section{border-top:1px solid var(--musgo-line)}
   padding:120px 0 72px;border-top:none;
 }
 .hero-grid{display:grid;grid-template-columns:1.32fr .88fr;gap:56px;align-items:center}
+.hero-grid.video{grid-template-columns:1fr 1.1fr}
 .badge{
   display:inline-flex;align-items:center;gap:10px;
   border:1px solid var(--musgo-line);padding:8px 14px;margin-bottom:34px;
@@ -335,6 +336,15 @@ footer p{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-tran
   .funnel{grid-template-columns:1fr}
   .fn:first-child{border-right:0;border-bottom:1px solid var(--musgo-line)}
 }
+
+/* ---------- VÍDEO ---------- */
+.video-wrap{position:relative;width:100%;padding-top:50%;overflow:hidden;border:1px solid var(--musgo-line);background:var(--base-2)}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-wrap::before,.video-wrap::after{content:'';position:absolute;width:13px;height:13px;border:1px solid var(--terra-dim);z-index:2;pointer-events:none}
+.video-wrap::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.video-wrap::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.video-cap{margin-top:12px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--off-mute)}
+@media (max-width:900px){.video-wrap{padding-top:56.25%}}
 </style>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -368,7 +378,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- 01 ABERTURA -->
 <section class="hero">
   <div class="wrap">
-    <div class="hero-grid">
+    <div class="hero-grid video">
       <div>
         <div class="badge"><span class="dot"></span> Para gestor de tráfego e dono de agência</div>
         <h1>Você paga por clique.
@@ -380,8 +390,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="btn-sub">R$67 · 17 aulas<br>90 dias de garantia</div>
         </div>
       </div>
-      <div class="portrait">
-        <div class="ph tall"><span>Retrato vertical · recortado · fundo escuro · luz de contorno em terracota vindo de trás</span></div>
+      <div>
+        <div class="video-wrap">
+          <iframe id="panda-d7c176b4-9540-43df-a9e5-27877a8b7f52" src="https://player-vz-a56b1c04-703.tv.pandavideo.com.br/embed/?v=d7c176b4-9540-43df-a9e5-27877a8b7f52" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture" allowfullscreen="true" fetchpriority="high" title="Funil de Lead Qualificado"></iframe>
+        </div>
+        <div class="video-cap">Assista antes de decidir · 
+          <span style="color:var(--terra)">o funil por dentro</span>
+        </div>
       </div>
     </div>
   </div>
@@ -522,12 +537,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <div class="eyebrow rv"><span class="n">03</span> A prova</div>
     <h2 class="rv">A prova é o funil rodando,<span class="light">não a promessa de resultado.</span></h2>
-    <p class="rv">Isso não é teoria de curso. É o funil que roda nas contas da minha agência, em negócio local, todo dia.</p>
+    <p class="rv">Isso não é teoria de curso. É o funil que roda na minha agência, em conta de negócio local, todo dia — dentro de uma operação de 80 clientes com um time de seis pessoas.</p>
     <div class="proof-grid rv">
       <div class="proof-list">
-        <div><span class="k">Contas rodando com o funil</span><span class="conf">[CONFIRMAR: número]</span></div>
-        <div><span class="k">Segmentos em que já foi aplicado</span><span class="conf">[CONFIRMAR: quais]</span></div>
-        <div><span class="k">Tempo rodando em produção</span><span class="conf">[CONFIRMAR: período]</span></div>
+        <div><span class="k">Clientes rodando com o funil</span><span class="conf">[CONFIRMAR: quantos dos 80]</span></div>
+        <div><span class="k">Segmentos de negócio local aplicados</span><span class="conf">[CONFIRMAR: quais]</span></div>
+        <div><span class="k">Rodando em produção há</span><span class="conf">[CONFIRMAR: período]</span></div>
       </div>
       <div class="ph" style="min-height:300px"><span>Captura real do funil condicional montado no Meta Ads · perguntas de qualificação visíveis · dado de cliente borrado ou conta de demonstração</span></div>
     </div>
@@ -625,5 +640,6 @@ document.querySelectorAll('a[href*="hotmart.com"]').forEach(function(a){
   a.addEventListener('click',function(){if(typeof fbq==='function'){fbq('track','InitiateCheckout');}});
 });
 </script>
+<script>!function(){var R=new RegExp("^https:\\/\\/player[\\w-]*(?:\\.(?:stg|tv))*\\.pandavideo\\.com(?:\\.br)?$");window.addEventListener('message',function(e){if(e.data&&e.data.type==='PANDA_READY'&&e.source&&R.test(e.origin))e.source.postMessage({type:'PANDA_CONTEXT',url:location.href},e.origin)})}()</script>
 </body>
 </html>
