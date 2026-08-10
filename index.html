@@ -380,6 +380,74 @@ footer p{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-tran
   .side:first-child{border-right:0;border-bottom:1px solid var(--musgo-line)}
   .side{padding:32px 24px}
 }
+
+/* ---------- INTERAÇÃO DO HUB ---------- */
+.links a{position:relative;overflow:hidden}
+.links a::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--terra);transform:scaleY(0);transform-origin:center;
+  transition:transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.links a::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(181,101,58,.09),transparent 55%);
+  opacity:0;transition:opacity .3s ease;pointer-events:none;
+}
+.links a:hover::before,.links a:focus-visible::before{transform:scaleY(1)}
+.links a:hover::after,.links a:focus-visible::after{opacity:1}
+.links a:hover{padding-left:16px}
+.links .nm,.links .ar{position:relative;z-index:1}
+
+/* seta com aceno contínuo — indica que é clicável mesmo sem hover */
+.links .ar{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border:1px solid var(--musgo-line);
+  font-size:12px;color:var(--terra);
+  animation:nudge 2.8s ease-in-out infinite;
+  transition:border-color .3s ease,background .3s ease,transform .3s ease;
+}
+.links a:nth-child(1) .ar{animation-delay:0s}
+.links a:nth-child(2) .ar{animation-delay:.35s}
+.links a:nth-child(3) .ar{animation-delay:.7s}
+.links a:nth-child(4) .ar{animation-delay:1.05s}
+.links a:hover .ar,.links a:focus-visible .ar{
+  border-color:var(--terra);background:var(--terra);color:var(--base);
+  animation:none;transform:translateX(3px);
+}
+@keyframes nudge{
+  0%,72%,100%{transform:translateX(0)}
+  80%{transform:translateX(5px)}
+  88%{transform:translateX(0)}
+}
+
+/* dica acima das colunas */
+.hint{
+  display:flex;align-items:center;gap:10px;margin-top:18px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--off-mute);
+}
+.hint .pulse{
+  width:6px;height:6px;border-radius:50%;background:var(--terra);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:.35;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.35)}
+}
+
+/* entrada escalonada */
+.side{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.3,1) forwards}
+.side:nth-child(1){animation-delay:.15s}
+.side:nth-child(2){animation-delay:.3s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+@media (hover:none){
+  .links .ar{border-color:var(--terra-dim)}
+}
+@media (prefers-reduced-motion:reduce){
+  .links .ar,.hint .pulse{animation:none!important}
+  .side{opacity:1;transform:none;animation:none}
+}
 </style>
 </head>
 <body>
@@ -392,6 +460,7 @@ footer p{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-tran
     </h1>
 
     <div class="eyebrow" style="margin-top:56px">Por onde você entra</div>
+    <div class="hint"><span class="pulse"></span> Escolha o seu lado e toque em uma das opções</div>
 
     <div class="fork">
       <div class="side">
