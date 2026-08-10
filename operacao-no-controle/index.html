@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operação no Controle — ClickUp para Agências de Tráfego | EmpresAtiva</title>
+<meta name="description" content="A estrutura que coloca toda a operação da sua agência dentro de um único ClickUp. Uma lista por tarefa, todos os clientes dentro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#0B0D0B;
+  --base-2:#101310;
+  --musgo:#17351F;
+  --musgo-line:#1E4028;
+  --terra:#B5653A;
+  --terra-dim:#7A4426;
+  --off:#F2EFE9;
+  --off-dim:#A8A49B;
+  --off-mute:#6E6A62;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:'Poppins',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--base);
+  color:var(--off);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.narrow{max-width:720px}
+
+/* ---------- BARRA FIXA ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 28px;
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .35s ease,border-color .35s ease,padding .35s ease;
+}
+.topbar.solid{background:rgba(11,13,11,.94);backdrop-filter:blur(14px);border-bottom-color:var(--musgo-line);padding:12px 28px}
+.topbar .mark{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--off-dim)}
+.topbar .mark b{color:var(--off);font-weight:500}
+.topbar .btn-mini{
+  opacity:0;transform:translateY(-6px);pointer-events:none;
+  transition:opacity .35s ease,transform .35s ease;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--terra);color:#0B0D0B;padding:10px 18px;text-decoration:none;font-weight:700;
+}
+.topbar.solid .btn-mini{opacity:1;transform:none;pointer-events:auto}
+
+/* ---------- ETIQUETAS ---------- */
+.eyebrow{
+  display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--terra);
+  margin-bottom:26px;
+}
+.eyebrow::after{content:'';flex:0 0 56px;height:1px;background:var(--terra-dim)}
+.eyebrow .n{color:var(--off-mute)}
+
+/* ---------- TIPOGRAFIA ---------- */
+h1{
+  font-size:clamp(2.7rem,6.4vw,5.4rem);
+  font-weight:800;line-height:.94;letter-spacing:-.032em;
+  text-transform:uppercase;
+}
+h1 .light{
+  display:block;margin-top:.24em;
+  font-weight:300;font-style:italic;text-transform:none;
+  font-size:.44em;line-height:1.22;letter-spacing:-.01em;color:var(--off-dim);
+}
+h2{
+  font-size:clamp(1.9rem,3.7vw,3.1rem);
+  font-weight:800;line-height:1.02;letter-spacing:-.028em;
+  text-transform:uppercase;margin-bottom:.5em;
+}
+h2 .light{
+  display:block;font-weight:300;font-style:italic;text-transform:none;
+  font-size:.62em;line-height:1.24;color:var(--off-dim);letter-spacing:-.01em;margin-top:.18em;
+}
+h3{font-size:1.05rem;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin-bottom:.55em}
+p{max-width:64ch;color:var(--off-dim);font-size:1.02rem}
+p+p{margin-top:1.1em}
+strong{color:var(--off);font-weight:600}
+.lead{font-size:1.16rem;color:var(--off);font-weight:300;max-width:60ch}
+
+section{padding:104px 0;position:relative;z-index:2}
+section+section{border-top:1px solid var(--musgo-line)}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:100svh;display:flex;align-items:center;
+  padding:120px 0 72px;border-top:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.32fr .88fr;gap:56px;align-items:center}
+.badge{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--musgo-line);padding:8px 14px;margin-bottom:34px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--off-dim);
+}
+.badge .dot{width:5px;height:5px;background:var(--terra);border-radius:50%}
+.hero .lead{margin-top:34px}
+.hero-cta{margin-top:40px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.portrait{
+  position:relative;aspect-ratio:3/4;
+  display:flex;align-items:center;justify-content:center;
+}
+.portrait::before{
+  content:'';position:absolute;inset:-14%;
+  background:radial-gradient(ellipse at 58% 42%,rgba(181,101,58,.28),transparent 66%);
+  filter:blur(28px);
+}
+
+/* ---------- PLACEHOLDER ---------- */
+.ph{
+  position:relative;width:100%;
+  border:1px dashed var(--musgo-line);background:var(--base-2);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:30px;min-height:180px;
+}
+.ph span{
+  font-family:var(--mono);font-size:10.5px;line-height:1.7;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--off-mute);max-width:34ch;
+}
+.ph::before,.ph::after{content:'';position:absolute;width:13px;height:13px;border:1px solid var(--terra-dim)}
+.ph::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+.ph::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.ph.tall{height:100%;min-height:440px}
+
+/* ---------- FAIXA DE NÚMEROS ---------- */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--musgo-line);border-bottom:1px solid var(--musgo-line);
+}
+.stat{padding:34px 26px;border-right:1px solid var(--musgo-line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-size:2.1rem;font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--off)}
+.stat span{display:block;margin-top:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--off-mute);line-height:1.6}
+
+/* ---------- AUTOIDENTIFICAÇÃO ---------- */
+.recon{background:var(--base-2)}
+.recon-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:44px;border-top:1px solid var(--musgo-line)}
+.recon-list li{
+  list-style:none;padding:26px 30px 26px 0;border-bottom:1px solid var(--musgo-line);
+  display:flex;gap:18px;align-items:flex-start;font-size:1.04rem;color:var(--off);
+}
+.recon-list li:nth-child(odd){padding-right:44px;border-right:1px solid var(--musgo-line)}
+.recon-list li:nth-child(odd) span,.recon-list li:nth-child(even) span{
+  font-family:var(--mono);font-size:11px;color:var(--terra);padding-top:5px;flex:0 0 auto
+}
+.recon-list li:nth-child(even){padding-left:44px}
+
+/* ---------- SINTOMAS ---------- */
+.symptoms{margin-top:46px;border-top:1px solid var(--musgo-line)}
+.symptoms div{
+  padding:24px 0;border-bottom:1px solid var(--musgo-line);
+  display:grid;grid-template-columns:56px 1fr;gap:20px;align-items:baseline;
+}
+.symptoms .idx{font-family:var(--mono);font-size:11px;color:var(--off-mute);letter-spacing:.1em}
+.symptoms p{margin:0;color:var(--off);font-size:1.02rem}
+
+/* ---------- ESQUEMA (SIGNATURE) ---------- */
+.schema{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:56px;border:1px solid var(--musgo-line)}
+.schema-col{padding:36px 32px}
+.schema-col:first-child{border-right:1px solid var(--musgo-line);opacity:.52}
+.schema-col:last-child{background:linear-gradient(180deg,rgba(181,101,58,.06),transparent 60%);box-shadow:inset 0 2px 0 var(--terra)}
+.schema-col h4{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--off-mute);font-weight:500;margin-bottom:6px;
+}
+.schema-col:last-child h4{color:var(--terra)}
+.schema-col .title{font-size:1.22rem;font-weight:700;letter-spacing:-.02em;margin-bottom:26px;color:var(--off)}
+.diagram{display:flex;flex-direction:column;gap:7px;margin-bottom:30px;min-height:132px}
+.node{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--musgo-line);padding:7px 11px;color:var(--off-mute);
+}
+.node.on{border-color:var(--terra-dim);color:var(--off);background:rgba(181,101,58,.07)}
+.node .in{display:block;padding-left:16px;color:var(--off-mute);border-left:1px solid var(--musgo-line);margin-top:6px;font-size:9.5px}
+.schema-rows{border-top:1px solid var(--musgo-line)}
+.schema-rows div{padding:15px 0;border-bottom:1px solid var(--musgo-line);font-size:.94rem;color:var(--off-dim);line-height:1.5}
+.schema-rows div:last-child{border-bottom:0}
+.schema-rows .k{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--off-mute);margin-bottom:5px}
+.schema-col:last-child .schema-rows div{color:var(--off)}
+
+/* ---------- CARDS ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:56px;border-top:1px solid var(--musgo-line);border-bottom:1px solid var(--musgo-line)}
+.card{padding:34px 30px;border-right:1px solid var(--musgo-line)}
+.card:last-child{border-right:0}
+.card .num{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--terra);display:block;margin-bottom:20px}
+.card p{font-size:.97rem;margin:0}
+
+/* ---------- OBJEÇÕES ---------- */
+.obj{margin-top:60px}
+.obj-item{padding:28px 0;border-top:1px solid var(--musgo-line);display:grid;grid-template-columns:.82fr 1.18fr;gap:40px}
+.obj-item:last-child{border-bottom:1px solid var(--musgo-line)}
+.obj-q{font-style:italic;font-weight:400;color:var(--off);font-size:1.06rem;line-height:1.45}
+.obj-a{color:var(--off-dim);font-size:.99rem;margin:0}
+
+/* ---------- FICHA TÉCNICA ---------- */
+.spec{border-top:1px solid var(--musgo-line);margin-top:48px}
+.spec-row{display:grid;grid-template-columns:230px 1fr;gap:28px;padding:18px 0;border-bottom:1px solid var(--musgo-line);align-items:baseline}
+.spec-row dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--off-mute)}
+.spec-row dd{color:var(--off);font-size:1rem}
+.conf{color:var(--terra);border-bottom:1px dashed var(--terra-dim);font-family:var(--mono);font-size:.86em;letter-spacing:.02em}
+
+/* ---------- PROVA ---------- */
+.proof-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start;margin-top:50px}
+.proof-list{border-top:1px solid var(--musgo-line)}
+.proof-list div{padding:20px 0;border-bottom:1px solid var(--musgo-line)}
+.proof-list .k{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--off-mute);margin-bottom:8px}
+
+/* ---------- PREÇO ---------- */
+.buy{background:var(--base-2)}
+.price-box{border:1px solid var(--musgo-line);margin-top:48px}
+.price-head{padding:44px 40px;border-bottom:1px solid var(--musgo-line);display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.price-val{font-size:clamp(3rem,7vw,4.6rem);font-weight:800;line-height:.9;letter-spacing:-.04em}
+.price-val sup{font-size:.32em;font-weight:400;vertical-align:super;color:var(--off-dim);letter-spacing:0}
+.price-note{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--off-mute);text-align:right;line-height:2}
+.price-body{padding:36px 40px;border-bottom:1px solid var(--musgo-line)}
+.bump{padding:28px 40px;border-bottom:1px solid var(--musgo-line);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+.bump .plus{font-family:var(--mono);font-size:1.3rem;color:var(--terra);line-height:1}
+.bump p{margin:0;font-size:.97rem}
+.warranty{padding:32px 40px;display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;border-bottom:1px solid var(--musgo-line)}
+.seal{
+  flex:0 0 auto;width:92px;height:92px;border:1px solid var(--terra-dim);border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+}
+.seal b{font-size:1.7rem;font-weight:800;line-height:1;color:var(--terra)}
+.seal span{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--off-mute);margin-top:4px}
+.buy-foot{padding:34px 40px}
+
+/* ---------- BOTÃO ---------- */
+.btn{
+  display:inline-block;background:var(--terra);color:#0B0D0B;text-decoration:none;
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  padding:19px 34px;transition:background .25s ease,transform .25s ease;
+}
+.btn:hover{background:#C97445;transform:translateY(-2px)}
+.btn:focus-visible{outline:2px solid var(--off);outline-offset:3px}
+.btn-sub{margin-top:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--off-mute)}
+
+/* ---------- FAQ ---------- */
+.faq{border-top:1px solid var(--musgo-line);margin-top:48px}
+details{border-bottom:1px solid var(--musgo-line)}
+summary{
+  padding:26px 40px 26px 0;cursor:pointer;list-style:none;position:relative;
+  font-size:1.06rem;font-weight:500;color:var(--off);
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';position:absolute;right:6px;top:24px;font-family:var(--mono);font-size:1.2rem;color:var(--terra);transition:transform .3s ease}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 40px 28px 0;margin:0;font-size:.99rem}
+
+/* ---------- RODAPÉ ---------- */
+footer{padding:44px 0 130px;border-top:1px solid var(--musgo-line);position:relative;z-index:2}
+footer p{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--off-mute);max-width:none}
+
+/* ---------- CTA FIXO MOBILE ---------- */
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;z-index:99;display:none;
+  padding:12px 18px;background:rgba(11,13,11,.96);backdrop-filter:blur(14px);
+  border-top:1px solid var(--musgo-line);transform:translateY(110%);transition:transform .35s ease;
+}
+.sticky.on{transform:none}
+.sticky .btn{display:block;text-align:center;padding:17px}
+
+/* ---------- REVELAÇÃO ---------- */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  section{padding:72px 0}
+  .hero{min-height:auto;padding:112px 0 60px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .portrait{aspect-ratio:4/5}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{border-bottom:1px solid var(--musgo-line)}
+  .stat:nth-child(2n){border-right:0}
+  .recon-list{grid-template-columns:1fr}
+  .recon-list li,.recon-list li:nth-child(odd),.recon-list li:nth-child(even){padding:22px 0;border-right:0}
+  .schema{grid-template-columns:1fr}
+  .schema-col:first-child{border-right:0;border-bottom:1px solid var(--musgo-line)}
+  .cards{grid-template-columns:1fr}
+  .card{border-right:0;border-bottom:1px solid var(--musgo-line)}
+  .card:last-child{border-bottom:0}
+  .obj-item{grid-template-columns:1fr;gap:14px}
+  .spec-row{grid-template-columns:1fr;gap:6px}
+  .proof-grid{grid-template-columns:1fr;gap:36px}
+  .price-head,.price-body,.bump,.warranty,.buy-foot{padding-left:26px;padding-right:26px}
+  .price-note{text-align:left}
+  .warranty{grid-template-columns:1fr;gap:20px}
+  .sticky{display:block}
+  footer{padding-bottom:110px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar">
+  <div class="mark"><b>Operação no Controle</b> · EmpresAtiva</div>
+  <a class="btn-mini" href="https://go.hotmart.com/E96312531Y?dp=1" target="_blank" rel="noopener">Quero a estrutura</a>
+</div>
+
+<!-- 01 ABERTURA -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="badge"><span class="dot"></span> Estrutura 2026 · ClickUp para agências</div>
+        <h1>Sua agência não precisa de mais clientes.
+          <span class="light">Precisa de uma operação que aguente os que você já tem.</span>
+        </h1>
+        <p class="lead">Operação no Controle é a estrutura que coloca toda a agência — clientes, tarefas, equipe e prazos — dentro de um único ClickUp. A mesma estrutura que eu uso para operar a minha.</p>
+        <div class="hero-cta">
+          <a class="btn" href="https://go.hotmart.com/E96312531Y?dp=1" target="_blank" rel="noopener">Quero a estrutura no controle</a>
+          <div class="btn-sub">R$197 · acesso imediato<br>7 dias de garantia</div>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="ph tall"><span>Retrato vertical · recortado · fundo escuro · luz de contorno em terracota vindo de trás</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="stats rv">
+    <div class="stat"><b>1</b><span>lista por tarefa,<br>não por cliente</span></div>
+    <div class="stat"><b>30d</b><span>para a estrutura<br>ficar de pé</span></div>
+    <div class="stat"><b>0</b><span>montagem do zero:<br>templates prontos</span></div>
+    <div class="stat"><b>7d</b><span>de garantia<br>sem pergunta</span></div>
+  </div>
+</div>
+
+<!-- RECONHECIMENTO -->
+<section class="recon">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">00</span> Reconhecimento</div>
+    <h2 class="rv">Se você se reconhece aqui, <span class="light">essa página é pra você.</span></h2>
+    <ul class="recon-list rv">
+      <li><span>01</span> Você abre lista por lista pra saber o que falta hoje</li>
+      <li><span>02</span> A entrega cai toda vez que entra cliente novo</li>
+      <li><span>03</span> Você é a única pessoa que sabe como a operação funciona</li>
+      <li><span>04</span> Contratar mais gente parece a única saída</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 02 CONFLITO -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">01</span> O problema</div>
+    <h2 class="rv">O problema não é volume de trabalho.<span class="light">É onde o trabalho está guardado.</span></h2>
+    <p class="rv">Quase toda agência organiza o ClickUp por cliente: uma lista para cada conta. Funciona com cinco. Com quinze, você abre quinze lugares diferentes pra saber o que precisa ser feito hoje. Com trinta, ninguém abre — e as coisas passam a viver na sua memória.</p>
+    <div class="symptoms rv">
+      <div><span class="idx">A.</span><p>A tarefa que era pra ser recorrente some depois de feita uma vez.</p></div>
+      <div><span class="idx">B.</span><p>O relatório que atrasou em um cliente ninguém percebeu, porque estava enterrado na lista dele.</p></div>
+      <div><span class="idx">C.</span><p>A informação do cliente está espalhada entre WhatsApp, planilha e a sua cabeça.</p></div>
+      <div><span class="idx">D.</span><p>Toda vez que entra gente nova no time, você reexplica a operação inteira do zero.</p></div>
+    </div>
+    <p class="rv" style="margin-top:34px"><strong>Não é falta de esforço.</strong> É que a estrutura foi montada pra multiplicar junto com a carteira. Quanto mais cliente, mais peça pra você segurar sozinho.</p>
+  </div>
+</section>
+
+<!-- 03 VIRADA -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">02</span> A virada</div>
+    <h2 class="rv">Vire a estrutura de lado.<span class="light">Uma lista por tarefa, todos os clientes dentro.</span></h2>
+    <p class="rv">Em vez de uma lista por cliente, você monta uma lista por <strong>tarefa</strong> — e todos os clientes vivem dentro dela. "Relatórios de hoje" mostra, num lugar só, os relatórios de todas as contas. Você para de perguntar "o que falta em cada cliente?" e passa a perguntar "o que falta em cada tarefa?". Adicionar o cliente número trinta e um não abre mais um lugar pra vigiar — ele entra nas listas que já existem.</p>
+
+    <div class="schema rv">
+      <div class="schema-col">
+        <h4>Estrutura antiga</h4>
+        <div class="title">Uma lista por cliente</div>
+        <div class="diagram">
+          <div class="node">Cliente A<span class="in">otimização · relatório · criativo</span></div>
+          <div class="node">Cliente B<span class="in">otimização · relatório · criativo</span></div>
+          <div class="node">Cliente C<span class="in">otimização · relatório · criativo</span></div>
+          <div class="node">… × 30</div>
+        </div>
+        <div class="schema-rows">
+          <div><span class="k">Lugares para abrir por dia</span>Um para cada conta ativa</div>
+          <div><span class="k">Ao entrar o cliente 30</span>Mais um lugar para vigiar</div>
+          <div><span class="k">Informação do cliente</span>Espalhada entre três lugares</div>
+          <div><span class="k">Recorrente concluída</span>Some até alguém lembrar</div>
+          <div><span class="k">Treinar alguém novo</span>Reexplicar a operação inteira</div>
+        </div>
+      </div>
+      <div class="schema-col">
+        <h4>Estrutura 2026</h4>
+        <div class="title">Uma lista por tarefa</div>
+        <div class="diagram">
+          <div class="node on">Otimização da semana<span class="in">cliente A · B · C · … × 30</span></div>
+          <div class="node on">Relatórios de hoje<span class="in">cliente A · B · C · … × 30</span></div>
+          <div class="node on">Criativos em produção<span class="in">cliente A · B · C · … × 30</span></div>
+        </div>
+        <div class="schema-rows">
+          <div><span class="k">Lugares para abrir por dia</span>Um, independente do tamanho da carteira</div>
+          <div><span class="k">Ao entrar o cliente 30</span>Ele entra nas listas que já existem</div>
+          <div><span class="k">Informação do cliente</span>No mesmo lugar onde o trabalho acontece</div>
+          <div><span class="k">Recorrente concluída</span>Volta no cronograma e acumula se atrasar</div>
+          <div><span class="k">Treinar alguém novo</span>Ele abre uma tela e enxerga o dia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards rv">
+      <div class="card">
+        <span class="num">I</span>
+        <h3>Recorrência que acumula</h3>
+        <p>As tarefas que se repetem voltam sozinhas para o cronograma, empilhadas e visíveis, em vez de desaparecer depois de feitas uma vez.</p>
+      </div>
+      <div class="card">
+        <span class="num">II</span>
+        <h3>ClickUp como CRM</h3>
+        <p>Histórico, contato e o que foi combinado ficam dentro da mesma ferramenta onde o trabalho acontece — não em três lugares desconectados.</p>
+      </div>
+      <div class="card">
+        <span class="num">III</span>
+        <h3>Templates para importar</h3>
+        <p>Você não monta isso do zero. Importa a estrutura pronta e adapta à sua carteira, sem parar a operação.</p>
+      </div>
+    </div>
+
+    <div class="obj rv">
+      <div class="obj-item">
+        <div class="obj-q">"Já tentei organizar o ClickUp e larguei."</div>
+        <p class="obj-a">Você largou porque montou por cliente, e ela desmoronou sozinha conforme a carteira cresceu. A estrutura por tarefa foi desenhada pro problema oposto: quanto mais cliente, mais ela se justifica.</p>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">"Meu time não vai adotar."</div>
+        <p class="obj-a">Time não adota estrutura que exige abrir quinze lugares. Adota a que mostra o dia inteiro numa tela. Menos lugares pra olhar é menos motivo pra ignorar.</p>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">"Migrar vai travar minha semana."</div>
+        <p class="obj-a">Por isso o produto entrega os templates prontos pra importar. Você não reconstrói a operação — troca o esqueleto por baixo dela.</p>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">"Isso é pra iniciante."</div>
+        <p class="obj-a">É o contrário. Iniciante não tem carteira o suficiente pra sentir o problema. Essa estrutura só faz sentido pra quem já tem contas demais pra segurar no olho.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PROVA -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">03</span> A prova</div>
+    <h2 class="rv">A prova aqui é a operação,<span class="light">não o faturamento.</span></h2>
+    <p class="rv">Minha autoridade nessa linha não é de quanto eu faturo — é de quantas contas eu consigo operar sem que a entrega caia.</p>
+    <div class="proof-grid rv">
+      <div class="proof-list">
+        <div><span class="k">Contas geridas na estrutura</span><span class="conf">[CONFIRMAR: número]</span></div>
+        <div><span class="k">Tamanho do time</span><span class="conf">[CONFIRMAR: número]</span></div>
+        <div><span class="k">Tempo rodando em produção</span><span class="conf">[CONFIRMAR: período]</span></div>
+      </div>
+      <div class="ph" style="min-height:300px"><span>Captura real da operação · visão por tarefa com o volume de contas ativo · nomes de cliente borrados ou workspace de demonstração</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FICHA TÉCNICA -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">04</span> Ficha técnica</div>
+    <h2 class="rv">O que exatamente <span class="light">você leva.</span></h2>
+    <dl class="spec rv">
+      <div class="spec-row"><dt>Formato</dt><dd><span class="conf">[CONFIRMAR: aulas gravadas + templates]</span></dd></div>
+      <div class="spec-row"><dt>Módulos</dt><dd><span class="conf">[CONFIRMAR: quantidade]</span></dd></div>
+      <div class="spec-row"><dt>O que acompanha</dt><dd>Templates de estrutura por tarefa, recorrência configurada e CRM <span class="conf">[CONFIRMAR: lista final]</span></dd></div>
+      <div class="spec-row"><dt>Implementação</dt><dd>Até 30 dias, no seu ritmo</dd></div>
+      <div class="spec-row"><dt>Nível exigido</dt><dd>Já opera clientes. Não é para quem está começando</dd></div>
+      <div class="spec-row"><dt>Plataforma</dt><dd>Hotmart · acesso imediato após a compra</dd></div>
+      <div class="spec-row"><dt>Tipo de acesso</dt><dd><span class="conf">[CONFIRMAR: vitalício ou por período]</span></dd></div>
+      <div class="spec-row"><dt>Garantia</dt><dd>7 dias</dd></div>
+    </dl>
+    <div class="ph rv" style="margin-top:48px;min-height:320px"><span>Captura da estrutura por tarefa dentro de moldura de notebook · perspectiva leve · brilho suave em terracota atrás</span></div>
+  </div>
+</section>
+
+<!-- 05 CONVITE -->
+<section class="buy">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">05</span> O convite</div>
+    <h2 class="rv">Monte a estrutura completa<span class="light">em até 30 dias.</span></h2>
+    <p class="rv">Operação no Controle te leva da estrutura antiga — a que multiplica junto com a carteira — para a estrutura por tarefa que segura o volume. Aulas passo a passo e os templates prontos pra importar e adaptar.</p>
+
+    <div class="price-box rv">
+      <div class="price-head">
+        <div class="price-val"><sup>R$</sup>197</div>
+        <div class="price-note">Pagamento único<br>Acesso imediato<br>Sem mensalidade</div>
+      </div>
+      <div class="price-body">
+        <p>Coloque ao lado do que está em jogo. Um cliente que você perde por falha de entrega — relatório atrasado, tarefa esquecida, informação perdida — leva embora meses de receita. A primeira contratação que você faz só porque a operação virou bagunça pesa muito mais que isso, todo mês, pra sempre.</p>
+        <p><strong>R$197 é o preço de trocar o esqueleto da operação</strong> antes que ela te obrigue a escolher entre crescer e manter a qualidade.</p>
+      </div>
+      <div class="bump">
+        <span class="plus">+</span>
+        <p>No checkout aparece o <strong>Funil de Lead Qualificado por R$47</strong> — a estrutura condicional que filtra o curioso antes do seu comercial. Um organiza a entrega, o outro organiza a entrada. Adicionar é opcional.</p>
+      </div>
+      <div class="warranty">
+        <div class="seal"><b>7</b><span>dias</span></div>
+        <p style="margin:0"><strong>Garantia de 7 dias.</strong> Entra, vê a estrutura por dentro, importa os templates. Se não for o que você precisa pra operação, pede o reembolso dentro do prazo — sem pergunta.</p>
+      </div>
+      <div class="buy-foot">
+        <a class="btn" href="https://go.hotmart.com/E96312531Y?dp=1" target="_blank" rel="noopener">Quero a estrutura no controle</a>
+        <div class="btn-sub">Acesso imediato · 7 dias de garantia · Compra segura pela Hotmart</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap narrow">
+    <div class="eyebrow rv">Antes de decidir</div>
+    <h2 class="rv">Perguntas <span class="light">frequentes</span></h2>
+    <div class="faq rv">
+      <details><summary>Preciso já usar ClickUp para aproveitar?</summary><p>Não. Se você nunca abriu o ClickUp, o curso monta a estrutura do zero com você. Se já usa e está uma bagunça, ele mostra como virar a organização de cliente para tarefa sem perder o que já está lá.</p></details>
+      <details><summary>Isso serve pra quem tem poucos clientes?</summary><p>Serve, mas o problema que ele resolve — custo de atenção crescendo junto com a carteira — aparece de verdade quando você já tem contas demais pra segurar no olho. Se você ainda está começando, provavelmente não é pra você agora.</p></details>
+      <details><summary>Quanto tempo leva pra montar?</summary><p>A estrutura completa costuma ficar de pé em até 30 dias, no seu ritmo. Como os templates vêm prontos pra importar, boa parte do trabalho é adaptar, não construir.</p></details>
+      <details><summary>Meu time precisa saber ClickUp?</summary><p>Não. A estrutura por tarefa foi desenhada pra reduzir os lugares que cada pessoa precisa olhar. É mais fácil de adotar do que a organização por cliente que a maioria já tenta usar.</p></details>
+      <details><summary>Como funciona a garantia?</summary><p>7 dias. Se dentro desse prazo você concluir que não é pra sua operação, pede o reembolso pela Hotmart e recebe de volta.</p></details>
+      <details><summary>Isso é pra iniciante que quer começar na área?</summary><p>Não. É pra quem já subiu campanha, já captou cliente e travou na entrega. Iniciante tem outra dor e outro caminho.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><p>© 2026 João Marot · EmpresAtiva Digital — Operação que aguenta escala.</p></div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <a class="btn" href="https://go.hotmart.com/E96312531Y?dp=1" target="_blank" rel="noopener">Quero a estrutura · R$197</a>
+</div>
+
+<script>
+(function(){
+  var bar=document.getElementById('topbar'),st=document.getElementById('sticky');
+  function onScroll(){
+    var y=window.scrollY;
+    bar.classList.toggle('solid',y>90);
+    st.classList.toggle('on',y>520);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  }else{document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in');});}
+})();
+</script>
+</body>
+</html>
