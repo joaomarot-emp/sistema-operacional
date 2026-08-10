@@ -352,6 +352,76 @@ footer p{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-tran
   .plan{padding:26px 20px}
 }
 
+
+/* ================= MOVIMENTO ================= */
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--terra);z-index:200;transition:width .12s linear}
+
+/* revelação base */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv-l{opacity:0;transform:translateX(-26px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
+.rv-r{opacity:0;transform:translateX(26px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
+.rv-l.in,.rv-r.in{opacity:1;transform:none}
+
+/* filhos escalonados */
+.stg>*{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
+.stg.in>*{opacity:1;transform:none}
+.stg.in>*:nth-child(1){transition-delay:.04s}
+.stg.in>*:nth-child(2){transition-delay:.10s}
+.stg.in>*:nth-child(3){transition-delay:.16s}
+.stg.in>*:nth-child(4){transition-delay:.22s}
+.stg.in>*:nth-child(5){transition-delay:.28s}
+.stg.in>*:nth-child(6){transition-delay:.34s}
+.stg.in>*:nth-child(7){transition-delay:.40s}
+.stg.in>*:nth-child(8){transition-delay:.46s}
+.stg.in>*:nth-child(9){transition-delay:.52s}
+.stg.in>*:nth-child(10){transition-delay:.58s}
+
+/* a régua do eyebrow desenha */
+.eyebrow::after{transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.3,1) .15s}
+.eyebrow.in::after,.rv.in .eyebrow::after,.in>.eyebrow::after{transform:scaleX(1)}
+
+/* botão: vida contínua sutil + varredura no hover */
+.btn{position:relative;overflow:hidden;isolation:isolate}
+.btn::after{
+  content:'';position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);
+  transform:translateX(-130%);
+}
+.btn:hover::after{transition:transform .75s cubic-bezier(.2,.7,.3,1);transform:translateX(130%)}
+.btn-live{animation:halo 3.6s ease-in-out infinite}
+@keyframes halo{
+  0%,100%{box-shadow:0 0 0 0 rgba(181,101,58,0)}
+  50%{box-shadow:0 0 0 5px rgba(181,101,58,.12)}
+}
+
+/* números contam */
+.stat b,.price-val,.plan .v{font-variant-numeric:tabular-nums}
+
+/* linhas de tabela acendem ao entrar */
+.schema-rows div,.fn-rows div,.spec-row,.mf,.proof-list div{
+  transition:background .4s ease,padding-left .3s ease;
+}
+.schema-col:last-child .schema-rows div:hover,
+.fn:last-child .fn-rows div:hover,
+.spec-row:hover,.mf:hover,.proof-list div:hover{
+  background:rgba(181,101,58,.045);
+}
+
+/* cards ganham profundidade no hover */
+.card,.mf{transition:background .35s ease,box-shadow .35s ease}
+.card:hover{background:rgba(23,53,31,.22);box-shadow:inset 0 2px 0 var(--terra-dim)}
+
+/* sticky mobile entra com mais presença */
+.sticky{box-shadow:0 -14px 30px rgba(0,0,0,.5)}
+
+@media (prefers-reduced-motion:reduce){
+  .rv,.rv-l,.rv-r,.stg>*{opacity:1!important;transform:none!important;transition:none!important}
+  .eyebrow::after{transform:scaleX(1)!important}
+  .btn-live{animation:none!important}
+  .progress{display:none}
+}
+
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}
@@ -688,5 +758,70 @@ document.querySelectorAll('a[href*="hotmart.com"]').forEach(function(a){
 });
 </script>
 <script>!function(){var R=new RegExp("^https:\\/\\/player[\\w-]*(?:\\.(?:stg|tv))*\\.pandavideo\\.com(?:\\.br)?$");window.addEventListener('message',function(e){if(e.data&&e.data.type==='PANDA_READY'&&e.source&&R.test(e.origin))e.source.postMessage({type:'PANDA_CONTEXT',url:location.href},e.origin)})}()</script>
+
+<script>
+(function(){
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* barra de progresso */
+  var pb=document.createElement('div');pb.className='progress';document.body.appendChild(pb);
+  function prog(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    pb.style.width=(h>0?(window.scrollY/h)*100:0)+'%';
+  }
+  window.addEventListener('scroll',prog,{passive:true});prog();
+
+  if(RM){
+    document.querySelectorAll('.rv,.rv-l,.rv-r,.stg').forEach(function(e){e.classList.add('in');});
+    return;
+  }
+
+  /* marca grupos escalonáveis */
+  ['.stats','.recon-list','.symptoms','.cards','.obj','.spec','.manifest','.faq','.schema-rows','.fn-rows','.proof-list','.flow','.diagram']
+    .forEach(function(sel){
+      document.querySelectorAll(sel).forEach(function(el){el.classList.add('stg');});
+    });
+
+  /* colunas de comparação entram dos lados */
+  document.querySelectorAll('.schema-col:first-child,.fn:first-child,.side:first-child').forEach(function(e){e.classList.add('rv-l');});
+  document.querySelectorAll('.schema-col:last-child,.fn:last-child,.side:last-child').forEach(function(e){e.classList.add('rv-r');});
+
+  /* eyebrow anima sozinho */
+  document.querySelectorAll('.eyebrow').forEach(function(e){e.classList.add('rv');});
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+    });
+  },{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+
+  document.querySelectorAll('.rv,.rv-l,.rv-r,.stg').forEach(function(el){io.observe(el);});
+
+  /* contagem dos números da faixa */
+  var cio=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      cio.unobserve(e.target);
+      var el=e.target,txt=el.textContent.trim(),m=txt.match(/^(\d+)(.*)$/);
+      if(!m)return;
+      var end=parseInt(m[1],10),suf=m[2],t0=null,dur=900;
+      function step(t){
+        if(!t0)t0=t;
+        var k=Math.min((t-t0)/dur,1),e2=1-Math.pow(1-k,3);
+        el.textContent=Math.round(end*e2)+suf;
+        if(k<1)requestAnimationFrame(step);
+      }
+      el.textContent='0'+suf;requestAnimationFrame(step);
+    });
+  },{threshold:.6});
+  document.querySelectorAll('.stat b').forEach(function(el){cio.observe(el);});
+
+  /* CTA principal ganha respiro quando visível */
+  var bio=new IntersectionObserver(function(es){
+    es.forEach(function(e){e.target.classList.toggle('btn-live',e.isIntersecting);});
+  },{threshold:.6});
+  var main=document.querySelector('.buy-foot .btn');if(main)bio.observe(main);
+})();
+</script>
 </body>
 </html>
