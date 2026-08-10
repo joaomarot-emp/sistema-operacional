@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>João Marot — Operação que aguenta escala</title>
-<meta name="description" content="Sistema Operacional para Agências. ClickUp, automação e rastreamento para agências de tráfego de negócios locais.">
+<title>Biblioteca do Sistema Operacional — EmpresAtiva</title>
+<meta name="description" content="O acervo que sustenta a operação de uma agência: fluxos, templates, POPs e automações prontos para importar. Assinatura anual.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -309,87 +309,273 @@ footer p{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-tran
   .rv{opacity:1;transform:none}
 }
 
-.hub{min-height:100svh;display:flex;align-items:center;padding:96px 0;border-top:none}
-.fork{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--musgo-line);margin-top:56px}
-.side{padding:40px 36px}
-.side:first-child{border-right:1px solid var(--musgo-line);box-shadow:inset 0 2px 0 var(--terra)}
-.side h3{font-size:1.32rem;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
-.side .who{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--off-mute);margin-bottom:22px;display:block}
-.side:first-child .who{color:var(--terra)}
-.side>p{font-size:.97rem;margin-bottom:26px}
-.links{border-top:1px solid var(--musgo-line)}
-.links a{
-  display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;
-  padding:19px 0;border-bottom:1px solid var(--musgo-line);
-  text-decoration:none;color:var(--off);transition:padding-left .25s ease,color .25s ease;
+/* ---------- ACERVO (signature desta página) ---------- */
+.manifest{border-top:1px solid var(--musgo-line);margin-top:52px}
+.mf{
+  display:grid;grid-template-columns:64px 1fr 150px;gap:26px;
+  padding:24px 0;border-bottom:1px solid var(--musgo-line);align-items:baseline;
 }
-.links a:hover{padding-left:10px;color:var(--terra)}
-.links a:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
-.links .nm{font-size:1.02rem;font-weight:500;line-height:1.35}
-.links .nm small{display:block;font-weight:300;font-size:.86rem;color:var(--off-dim);margin-top:3px}
-.links .ar{font-family:var(--mono);font-size:13px;color:var(--terra)}
+.mf .code{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--terra)}
+.mf h3{margin-bottom:.35em}
+.mf p{margin:0;font-size:.95rem}
+.mf .tag{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--off-mute);text-align:right;line-height:1.7;
+}
+.mf.core{background:linear-gradient(90deg,rgba(181,101,58,.07),transparent 62%);box-shadow:inset 2px 0 0 var(--terra)}
+.mf.core .tag{color:var(--terra)}
+.mf.core h3::after{
+  content:'peça principal';font-family:var(--mono);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--terra);margin-left:12px;vertical-align:middle;
+}
+.plans{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--musgo-line);margin-top:8px}
+.plan{padding:34px 32px}
+.plan:first-child{border-right:1px solid var(--musgo-line);box-shadow:inset 0 2px 0 var(--terra)}
+.plan h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--off-mute);font-weight:500;margin-bottom:14px}
+.plan:first-child h4{color:var(--terra)}
+.plan .v{font-size:2.5rem;font-weight:800;line-height:1;letter-spacing:-.035em}
+.plan .v sup{font-size:.34em;font-weight:400;vertical-align:super;color:var(--off-dim)}
+.plan .d{margin-top:12px;font-size:.93rem;color:var(--off-dim)}
 @media (max-width:900px){
-  .fork{grid-template-columns:1fr}
-  .side:first-child{border-right:0;border-bottom:1px solid var(--musgo-line)}
-  .side{padding:32px 24px}
+  .mf{grid-template-columns:52px 1fr;gap:16px}
+  .mf .tag{grid-column:2;text-align:left;margin-top:8px}
+  .plans{grid-template-columns:1fr}
+  .plan:first-child{border-right:0;border-bottom:1px solid var(--musgo-line)}
 }
 </style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K3FP6MWP');</script>
+<!-- End Google Tag Manager -->
+<!-- Meta Pixel -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1570269951243411');fbq('track','PageView');</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1570269951243411&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3FP6MWP"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-<section class="hub">
+
+<div class="topbar" id="topbar">
+  <div class="mark"><b>Biblioteca do Sistema Operacional</b> · EmpresAtiva</div>
+  <a class="btn-mini" href="#assinar">Quero assinar</a>
+</div>
+
+<!-- 01 ABERTURA -->
+<section class="hero">
   <div class="wrap">
-    <div class="badge"><span class="dot"></span> João Marot · EmpresAtiva Digital</div>
-    <h1>Operação que<br>aguenta escala.
-      <span class="light">Sua agência não precisa de mais clientes. Precisa de uma operação que aguente os que você já tem.</span>
-    </h1>
-
-    <div class="eyebrow" style="margin-top:56px">Por onde você entra</div>
-
-    <div class="fork">
-      <div class="side">
-        <span class="who">Tenho uma agência</span>
-        <h3>Dono de agência ou gestor de tráfego</h3>
-        <p>Você já sabe subir campanha e captar cliente. Trava na entrega quando a carteira cresce.</p>
-        <div class="links">
-          <a href="/operacao-no-controle/">
-            <span class="nm">Operação no Controle<small>Sua agência inteira dentro de um ClickUp · R$197</small></span>
-            <span class="ar">→</span>
-          </a>
-          <a href="/lead-qualificado/">
-            <span class="nm">Funil de Lead Qualificado<small>Pare de pagar por lead que não compra · R$67</small></span>
-            <span class="ar">→</span>
-          </a>
-          <a href="/biblioteca/">
-            <span class="nm">Biblioteca do Sistema Operacional<small>O acervo pronto pra importar · R$997/ano</small></span>
-            <span class="ar">→</span>
-          </a>
-          <a href="#" data-comunidade>
-            <span class="nm">Comunidade no WhatsApp<small>Grátis · dúvida respondida e encontros ao vivo</small></span>
-            <span class="ar">→</span>
-          </a>
+    <div class="hero-grid">
+      <div>
+        <div class="badge"><span class="dot"></span> Assinatura anual · acervo operacional</div>
+        <h1>Pare de construir a mesma peça duas vezes.
+          <span class="light">Assine o acervo pronto — e tudo que for construído depois.</span>
+        </h1>
+        <p class="lead">Fluxos de n8n e Make, templates de ClickUp, POPs, rastreamento e dashboards. Já montados, prontos pra importar. Quando a plataforma muda, quem refaz a peça sou eu.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#assinar">Ver o que tem dentro</a>
+          <div class="btn-sub">R$997 à vista ou 12× R$97<br>anual · sem mês avulso</div>
         </div>
       </div>
+      <div class="portrait">
+        <div class="ph tall"><span>Retrato vertical · recortado · fundo escuro · luz de contorno em terracota vindo de trás</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="side">
-        <span class="who">Tenho um negócio</span>
-        <h3>Dono de negócio local</h3>
-        <p>Você quer mais cliente chegando e uma fonte que não dependa só de indicação.</p>
-        <div class="links">
-          <a href="/operacao-trafego/">
-            <span class="nm">Operação Tráfego<small>Mentoria: aprenda a comandar o próprio tráfego em 90 dias</small></span>
-            <span class="ar">→</span>
-          </a>
-          <a href="https://www.empresativa.com.br/" target="_blank" rel="noopener">
-            <span class="nm">EmpresAtiva Digital<small>Gestão de tráfego pago para o seu negócio</small></span>
-            <span class="ar">→</span>
-          </a>
-          <a href="https://api.whatsapp.com/send/?phone=5521979093554" target="_blank" rel="noopener">
-            <span class="nm">Diagnóstico gratuito<small>Análise do seu negócio · resposta em 24h</small></span>
-            <span class="ar">→</span>
-          </a>
+<div class="wrap">
+  <div class="stats rv">
+    <div class="stat"><b><span class="conf">[N]</span></b><span>fluxos prontos<br>para importar</span></div>
+    <div class="stat"><b><span class="conf">[N]</span></b><span>templates<br>e POPs</span></div>
+    <div class="stat"><b>12m</b><span>de atualização<br>inclusa</span></div>
+    <div class="stat"><b>7d</b><span>de garantia<br>sem pergunta</span></div>
+  </div>
+</div>
+
+<!-- 02 CONFLITO -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">01</span> O problema</div>
+    <h2 class="rv">Construir sozinho custa meses.<span class="light">Manter custa pra sempre.</span></h2>
+    <p class="rv">Todo gestor que já tentou automatizar a própria agência conhece a conta. Um fluxo de relatório que funcione de verdade leva semanas de tentativa e erro. A estrutura de rastreamento que liga o lead à campanha certa é um projeto inteiro. Cada peça é um mês que você não passou operando cliente.</p>
+    <div class="symptoms rv">
+      <div><span class="idx">A.</span><p>A plataforma muda a API e a automação que custou três semanas quebra sozinha.</p></div>
+      <div><span class="idx">B.</span><p>A Meta muda a política e o que estava aprovado para de rodar.</p></div>
+      <div><span class="idx">C.</span><p>Você reconstrói do zero — de novo — enquanto a operação real espera.</p></div>
+    </div>
+    <p class="rv" style="margin-top:34px"><strong>Fazer sozinho não é só caro na primeira vez.</strong> É caro toda vez.</p>
+    <div class="ph rv" style="margin-top:44px;min-height:260px"><span>Captura de um fluxo n8n ou Make complexo, cheio de nós · o volume de trabalho que uma única automação representa</span></div>
+  </div>
+</section>
+
+<!-- 03 VIRADA · O ACERVO -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">02</span> O acervo</div>
+    <h2 class="rv">O que está dentro<span class="light">e continua entrando o ano todo.</span></h2>
+    <p class="rv">A Biblioteca inverte a lógica. Em vez de montar cada peça e depois correr atrás de cada mudança, você assina o acervo inteiro pronto pra importar — e recebe, junto, tudo que for construído dali pra frente.</p>
+
+    <div class="manifest rv">
+      <div class="mf core">
+        <span class="code">ACV-01</span>
+        <div><h3>Kit de Automações</h3><p>Fluxos de n8n e Make prontos para importar: relatório automático, alerta de tarefa atrasada, agente de qualificação, rastreio de lead.</p></div>
+        <div class="tag">n8n · Make<br>importar e ativar</div>
+      </div>
+      <div class="mf">
+        <span class="code">ACV-02</span>
+        <div><h3>Templates de ClickUp</h3><p>A estrutura por tarefa e as visões prontas pra adaptar à sua carteira, incluindo recorrência configurada e CRM.</p></div>
+        <div class="tag">ClickUp<br>template</div>
+      </div>
+      <div class="mf">
+        <span class="code">ACV-03</span>
+        <div><h3>Estrutura de Drive por cliente</h3><p>A organização de arquivos padronizada, do jeito que escala sem virar labirinto quando a carteira cresce.</p></div>
+        <div class="tag">Google Drive<br>estrutura</div>
+      </div>
+      <div class="mf">
+        <span class="code">ACV-04</span>
+        <div><h3>POPs de operação</h3><p>Os procedimentos escritos que fazem o time entregar igual sem você no meio de cada etapa.</p></div>
+        <div class="tag">documento<br>editável</div>
+      </div>
+      <div class="mf">
+        <span class="code">ACV-05</span>
+        <div><h3>Guia de budget por performance</h3><p>Como decidir onde colocar a verba de cada conta, documentado em vez de improvisado.</p></div>
+        <div class="tag">documento<br>+ planilha</div>
+      </div>
+      <div class="mf">
+        <span class="code">ACV-06</span>
+        <div><h3>Rastreamento e dashboards</h3><p>Do lead até a campanha que o gerou. Estrutura de atribuição e painéis prontos para o cliente enxergar a entrega.</p></div>
+        <div class="tag">Stract · Looker<br>montado</div>
+      </div>
+      <div class="mf">
+        <span class="code">ACV-07</span>
+        <div><h3>Atualização contínua</h3><p>Quando a plataforma, a política ou o formato muda, a peça é refeita e republicada dentro da biblioteca.</p></div>
+        <div class="tag">durante<br>os 12 meses</div>
+      </div>
+      <div class="mf">
+        <span class="code">ACV-08</span>
+        <div><h3>Ritual ao vivo</h3><p>Encontro recorrente pra aplicar, tirar dúvida e acompanhar o que entrou de novo no acervo.</p></div>
+        <div class="tag">ao vivo<br><span class="conf">[periodicidade]</span></div>
+      </div>
+    </div>
+
+    <p class="rv" style="margin-top:36px"><strong>Sobre WhatsApp:</strong> o que está no acervo é feito para campanhas na API oficial — opt-in registrado, templates aprovados pela Meta, dentro das regras de 2026. Nada de método fora da plataforma oficial.</p>
+
+    <div class="obj rv">
+      <div class="obj-item">
+        <div class="obj-q">"Por que anual? Não dá pra pagar um mês pra ver?"</div>
+        <p class="obj-a">Porque biblioteca é baixável. Um mês de acesso é tempo de sobra pra baixar todos os templates e fluxos e sumir. O plano anual protege o acervo e o compromisso de quem entra pra usar de verdade.</p>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">"Preciso de servidor próprio?"</div>
+        <p class="obj-a">Para as automações self-hosted, sim — n8n e afins rodam numa VPS. Não é limitação do produto: é como automação self-hosted funciona, e é o que te dá controle e custo previsível em vez de pagar por execução na plataforma de terceiro. <span class="conf">[CONFIRMAR: se acompanha guia de VPS]</span></p>
+      </div>
+      <div class="obj-item">
+        <div class="obj-q">"Já sei montar automação. Pra que assinar?"</div>
+        <p class="obj-a">Se você já sabe, você já sabe o quanto custa manter. A biblioteca não te vende a capacidade de montar — te vende os meses que você não vai gastar montando de novo cada vez que algo muda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 PROVA -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">03</span> A prova</div>
+    <h2 class="rv">A prova é o acervo<span class="light">e o fato de ele continuar vivo.</span></h2>
+    <p class="rv">Não é promessa de conteúdo futuro. É o que já está lá dentro hoje — e a esteira de atualização que mantém isso funcionando enquanto o mercado muda por baixo.</p>
+    <div class="proof-grid rv">
+      <div class="proof-list">
+        <div><span class="k">Fluxos prontos hoje</span><span class="conf">[CONFIRMAR: número]</span></div>
+        <div><span class="k">Templates e POPs</span><span class="conf">[CONFIRMAR: número]</span></div>
+        <div><span class="k">Última atualização feita</span><span class="conf">[CONFIRMAR: qual peça, após qual mudança]</span></div>
+      </div>
+      <div class="ph" style="min-height:300px"><span>Captura real do acervo · estrutura de pastas e módulos com o volume visível · borrar o que for sensível</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FICHA TÉCNICA -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">04</span> Ficha técnica</div>
+    <h2 class="rv">Condições <span class="light">da assinatura.</span></h2>
+    <dl class="spec rv">
+      <div class="spec-row"><dt>Formato</dt><dd>Acervo online com download dos arquivos</dd></div>
+      <div class="spec-row"><dt>Modelo</dt><dd>Assinatura anual · sem mês avulso</dd></div>
+      <div class="spec-row"><dt>Atualização</dt><dd>Inclusa durante os 12 meses</dd></div>
+      <div class="spec-row"><dt>Pré-requisito</dt><dd>Servidor próprio (VPS) para as automações self-hosted</dd></div>
+      <div class="spec-row"><dt>Nível exigido</dt><dd>Opera clientes. Não é preciso programar</dd></div>
+      <div class="spec-row"><dt>Plataforma</dt><dd><span class="conf">[CONFIRMAR: onde o acervo é entregue]</span></dd></div>
+      <div class="spec-row"><dt>Renovação</dt><dd><span class="conf">[CONFIRMAR: o que acontece no mês 13]</span></dd></div>
+      <div class="spec-row"><dt>Garantia</dt><dd>7 dias</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- 05 CONVITE -->
+<section class="buy" id="assinar">
+  <div class="wrap">
+    <div class="eyebrow rv"><span class="n">05</span> O convite</div>
+    <h2 class="rv">Assine a Biblioteca<span class="light">do Sistema Operacional.</span></h2>
+    <p class="rv">Você entra e importa. Participa do ritual ao vivo. E ao longo do ano, tudo que for construído e toda atualização de plataforma entram no seu acesso, sem custo novo.</p>
+
+    <div class="price-box rv">
+      <div class="plans">
+        <div class="plan">
+          <h4>À vista</h4>
+          <div class="v"><sup>R$</sup>997</div>
+          <div class="d">Pagamento único no PIX ou cartão. Acesso por 12 meses.</div>
+        </div>
+        <div class="plan">
+          <h4>Parcelado</h4>
+          <div class="v">12× <sup>R$</sup>97</div>
+          <div class="d">No cartão. Mesmo acesso, mesmo período.</div>
         </div>
       </div>
+      <div class="price-body">
+        <p>Faça a conta pelo lado do trabalho, não pelo lado do desejo. Um único fluxo que funcione custa semanas pra montar do zero — e volta a custar toda vez que a plataforma muda e ele quebra.</p>
+        <p><strong>R$997 no ano é menos que reconstruir uma peça sozinho</strong>, e você não leva uma peça: leva o acervo inteiro, mantido vivo o ano todo.</p>
+      </div>
+      <div class="bump">
+        <span class="plus">§</span>
+        <p><strong>Por que não existe mês avulso.</strong> Biblioteca é baixável. Sem o compromisso anual, o modelo se destrói: baixa tudo em um mês e sai. O anual é o que mantém o acervo de pé pra quem entra pra usar.</p>
+      </div>
+      <div class="warranty">
+        <div class="seal"><b>7</b><span>dias</span></div>
+        <p style="margin:0"><strong>Garantia de 7 dias.</strong> Você entra, vê o acervo por dentro, importa o que quiser testar. Se nesse prazo concluir que não é pra sua operação, pede o reembolso — sem pergunta.</p>
+      </div>
+      <div class="buy-foot">
+        <a class="btn" href="#" data-checkout>Quero assinar a Biblioteca</a>
+        <div class="btn-sub">Acesso imediato ao acervo · 7 dias de garantia · assinatura anual<br><span class="conf">[CONFIRMAR: link do checkout]</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap narrow">
+    <div class="eyebrow rv">Antes de decidir</div>
+    <h2 class="rv">Perguntas <span class="light">frequentes</span></h2>
+    <div class="faq rv">
+      <details><summary>Preciso de servidor próprio (VPS)?</summary><p>Para as automações self-hosted, sim. Fluxos de n8n e afins rodam num servidor seu. Não é limitação do produto — é como automação self-hosted funciona, e é o que te dá controle e custo previsível. <span class="conf">[CONFIRMAR: se acompanha orientação de contratação e configuração]</span></p></details>
+      <details><summary>O que já tem pronto hoje e o que ainda vem?</summary><p><span class="conf">[CONFIRMAR: o que está disponível na data de publicação]</span> A assinatura dá acesso ao que existe agora e a tudo que for construído durante o seu ano, incluindo as atualizações quando plataforma ou política muda.</p></details>
+      <details><summary>Por que só anual?</summary><p>Como a biblioteca é baixável, o mês avulso permitiria baixar tudo e sair — o que inviabiliza o acervo. O plano anual protege o material e o compromisso de quem entra pra usar.</p></details>
+      <details><summary>Preciso saber programar?</summary><p>Não pra usar. Os fluxos vêm prontos pra importar e os templates pra adaptar. Você precisa saber operar a sua agência; a parte técnica vem montada.</p></details>
+      <details><summary>Qual a diferença entre a comunidade gratuita e a Biblioteca?</summary><p>A comunidade gratuita é convivência, evento e descoberta. A Biblioteca é o acervo: templates, fluxos, POPs, dashboards e o ritual ao vivo. Uma é onde você acompanha; a outra é onde você importa e implementa.</p></details>
+      <details><summary>Isso substitui o antigo Kit de Automações?</summary><p>Sim. O Kit deixou de ser produto avulso e virou o conteúdo principal da Biblioteca. Quem procurava o Kit encontra aqui, dentro do acervo completo e sempre atualizado.</p></details>
     </div>
   </div>
 </section>
@@ -397,5 +583,35 @@ footer p{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-tran
 <footer>
   <div class="wrap"><p>© 2026 João Marot · EmpresAtiva Digital — Operação que aguenta escala.</p></div>
 </footer>
+
+<div class="sticky" id="sticky">
+  <a class="btn" href="#assinar">Assinar · R$997/ano</a>
+</div>
+
+<script>
+(function(){
+  var bar=document.getElementById('topbar'),st=document.getElementById('sticky');
+  function onScroll(){
+    var y=window.scrollY;
+    bar.classList.toggle('solid',y>90);
+    st.classList.toggle('on',y>520);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  }else{document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in');});}
+})();
+</script>
+
+<script>
+document.querySelectorAll('a[href*="hotmart.com"],a[data-checkout]').forEach(function(a){
+  a.addEventListener('click',function(){
+    if(typeof fbq==='function'){fbq('track','InitiateCheckout');}
+  });
+});
+</script>
 </body>
 </html>
